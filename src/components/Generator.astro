@@ -2,90 +2,164 @@
 import { countries, emailDomains } from '../lib/data';
 ---
 
-<div class="max-w-2xl mx-auto px-4 py-8">
-  <div class="bg-white rounded-2xl shadow-lg overflow-hidden">
-    <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-8 text-white">
-      <h1 class="text-3xl font-bold mb-2">Facebook 注册信息生成器</h1>
-      <p class="text-blue-100">自动生成随机注册信息,保护您的隐私</p>
+<div class="max-w-2xl mx-auto px-4 py-8 relative">
+  <div class="decorative-circles"></div>
+
+  <div class="card-container">
+    <div class="header-section">
+      <div class="icon-badge">
+        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M9 12.75 11.25 15 15 9.75m-3-7.036A11.959 11.959 0 0 1 3.598 6 11.99 11.99 0 0 0 3 9.749c0 5.592 3.824 10.29 9 11.623 5.176-1.332 9-6.03 9-11.622 0-1.31-.21-2.571-.598-3.751h-.152c-3.196 0-6.1-1.248-8.25-3.285Z" />
+        </svg>
+      </div>
+      <h1 class="main-title">隐私信息生成器</h1>
+      <p class="subtitle">一键生成安全的随机身份信息</p>
     </div>
 
-    <div class="p-6">
-      <div id="loading-state" class="text-center py-12">
-        <div class="inline-block w-12 h-12 border-4 border-blue-200 border-t-blue-600 rounded-full animate-spin"></div>
-        <p class="mt-4 text-gray-600">正在检测您的位置...</p>
+    <div class="content-section">
+      <div id="loading-state" class="loading-container">
+        <div class="spinner"></div>
+        <p class="loading-text">正在检测您的位置...</p>
       </div>
 
       <div id="generator-content" class="hidden">
-        <div class="space-y-4 mb-6">
-          <div class="field-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">姓氏</label>
-            <div class="flex gap-2">
-              <input type="text" id="lastName" readonly class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              <button data-copy="lastName" class="copy-btn px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors min-w-[80px]">复制</button>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">名字</label>
-            <div class="flex gap-2">
-              <input type="text" id="firstName" readonly class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              <button data-copy="firstName" class="copy-btn px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors min-w-[80px]">复制</button>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">生日</label>
-            <div class="flex gap-2">
-              <input type="text" id="birthday" readonly class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              <button data-copy="birthday" class="copy-btn px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors min-w-[80px]">复制</button>
-            </div>
-          </div>
-
-          <div class="field-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">
-              手机号
-              <span id="phonePrefix" class="text-gray-500 text-xs ml-2"></span>
+        <div class="fields-grid">
+          <div class="field-item">
+            <label class="field-label">
+              <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M15.75 6a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0ZM4.501 20.118a7.5 7.5 0 0 1 14.998 0A17.933 17.933 0 0 1 12 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+              </svg>
+              姓氏
             </label>
-            <div class="flex gap-2">
-              <input type="text" id="phone" readonly class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              <button data-copy="phone" class="copy-btn px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors min-w-[80px]">复制</button>
+            <div class="input-group">
+              <input type="text" id="lastName" readonly class="styled-input" />
+              <button data-copy="lastName" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                </svg>
+              </button>
             </div>
           </div>
 
-          <div class="field-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">密码</label>
-            <div class="flex gap-2">
-              <input type="text" id="password" readonly class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 font-mono" />
-              <button data-copy="password" class="copy-btn px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors min-w-[80px]">复制</button>
+          <div class="field-item">
+            <label class="field-label">
+              <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17.982 18.725A7.488 7.488 0 0 0 12 15.75a7.488 7.488 0 0 0-5.982 2.975m11.963 0a9 9 0 1 0-11.963 0m11.963 0A8.966 8.966 0 0 1 12 21a8.966 8.966 0 0 1-5.982-2.275M15 9.75a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
+              </svg>
+              名字
+            </label>
+            <div class="input-group">
+              <input type="text" id="firstName" readonly class="styled-input" />
+              <button data-copy="firstName" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                </svg>
+              </button>
             </div>
           </div>
 
-          <div class="field-group">
-            <label class="block text-sm font-medium text-gray-700 mb-2">邮箱</label>
-            <div class="flex gap-2">
-              <input type="text" id="email" readonly class="flex-1 px-4 py-3 bg-gray-50 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" />
-              <button data-copy="email" class="copy-btn px-4 py-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition-colors min-w-[80px]">复制</button>
+          <div class="field-item">
+            <label class="field-label">
+              <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 0 1 2.25-2.25h13.5A2.25 2.25 0 0 1 21 7.5v11.25m-18 0A2.25 2.25 0 0 0 5.25 21h13.5A2.25 2.25 0 0 0 21 18.75m-18 0v-7.5A2.25 2.25 0 0 1 5.25 9h13.5A2.25 2.25 0 0 1 21 11.25v7.5" />
+              </svg>
+              生日
+            </label>
+            <div class="input-group">
+              <input type="text" id="birthday" readonly class="styled-input" />
+              <button data-copy="birthday" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="field-item">
+            <label class="field-label">
+              <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 1.5H8.25A2.25 2.25 0 0 0 6 3.75v16.5a2.25 2.25 0 0 0 2.25 2.25h7.5A2.25 2.25 0 0 0 18 20.25V3.75a2.25 2.25 0 0 0-2.25-2.25H13.5m-3 0V3h3V1.5m-3 0h3m-3 18.75h3" />
+              </svg>
+              手机号 <span id="phonePrefix" class="phone-prefix"></span>
+            </label>
+            <div class="input-group">
+              <input type="text" id="phone" readonly class="styled-input" />
+              <button data-copy="phone" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="field-item">
+            <label class="field-label">
+              <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 10.5V6.75a4.5 4.5 0 1 0-9 0v3.75m-.75 11.25h10.5a2.25 2.25 0 0 0 2.25-2.25v-6.75a2.25 2.25 0 0 0-2.25-2.25H6.75a2.25 2.25 0 0 0-2.25 2.25v6.75a2.25 2.25 0 0 0 2.25 2.25Z" />
+              </svg>
+              密码
+            </label>
+            <div class="input-group">
+              <input type="text" id="password" readonly class="styled-input font-mono" />
+              <button data-copy="password" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                </svg>
+              </button>
+            </div>
+          </div>
+
+          <div class="field-item">
+            <label class="field-label">
+              <svg class="field-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
+              </svg>
+              邮箱
+            </label>
+            <div class="input-group">
+              <input type="text" id="email" readonly class="styled-input" />
+              <button data-copy="email" class="copy-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15.666 3.888A2.25 2.25 0 0 0 13.5 2.25h-3c-1.03 0-1.9.693-2.166 1.638m7.332 0c.055.194.084.4.084.612v0a.75.75 0 0 1-.75.75H9a.75.75 0 0 1-.75-.75v0c0-.212.03-.418.084-.612m7.332 0c.646.049 1.288.11 1.927.184 1.1.128 1.907 1.077 1.907 2.185V19.5a2.25 2.25 0 0 1-2.25 2.25H6.75A2.25 2.25 0 0 1 4.5 19.5V6.257c0-1.108.806-2.057 1.907-2.185a48.208 48.208 0 0 1 1.927-.184" />
+                </svg>
+              </button>
             </div>
           </div>
         </div>
 
-        <div class="flex gap-3">
-          <button id="regenerateBtn" class="flex-1 px-6 py-3 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-lg hover:from-blue-600 hover:to-blue-700 transition-all font-medium shadow-md hover:shadow-lg">
+        <div class="action-buttons">
+          <button id="regenerateBtn" class="primary-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M16.023 9.348h4.992v-.001M2.985 19.644v-4.992m0 0h4.992m-4.993 0 3.181 3.183a8.25 8.25 0 0 0 13.803-3.7M4.031 9.865a8.25 8.25 0 0 1 13.803-3.7l3.181 3.182m0-4.991v4.99" />
+            </svg>
             生成新身份
           </button>
-          <button id="inboxBtn" class="px-6 py-3 bg-green-500 text-white rounded-lg hover:bg-green-600 transition-colors font-medium shadow-md hover:shadow-lg">
+          <button id="inboxBtn" class="secondary-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859M12 3v8.25m0 0-3-3m3 3 3-3" />
+            </svg>
             查看收件箱
           </button>
         </div>
 
-        <div class="mt-6 pt-6 border-t border-gray-200 flex gap-3">
-          <button id="countryBtn" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-between">
-            <span>地区:</span>
-            <span id="selectedCountry" class="font-medium text-blue-600"></span>
+        <div class="settings-section">
+          <button id="countryBtn" class="setting-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 21a9.004 9.004 0 0 0 8.716-6.747M12 21a9.004 9.004 0 0 1-8.716-6.747M12 21c2.485 0 4.5-4.03 4.5-9S14.485 3 12 3m0 18c-2.485 0-4.5-4.03-4.5-9S9.515 3 12 3m0 0a8.997 8.997 0 0 1 7.843 4.582M12 3a8.997 8.997 0 0 0-7.843 4.582m15.686 0A11.953 11.953 0 0 1 12 10.5c-2.998 0-5.74-1.1-7.843-2.918m15.686 0A8.959 8.959 0 0 1 21 12c0 .778-.099 1.533-.284 2.253m0 0A17.919 17.919 0 0 1 12 16.5c-3.162 0-6.133-.815-8.716-2.247m0 0A9.015 9.015 0 0 1 3 12c0-1.605.42-3.113 1.157-4.418" />
+            </svg>
+            <div class="setting-info">
+              <span class="setting-label">地区</span>
+              <span id="selectedCountry" class="setting-value"></span>
+            </div>
           </button>
-          <button id="domainBtn" class="flex-1 px-4 py-3 bg-gray-100 text-gray-700 rounded-lg hover:bg-gray-200 transition-colors flex items-center justify-between">
-            <span>邮箱域名:</span>
-            <span id="selectedDomain" class="font-medium text-blue-600">随机</span>
+          <button id="domainBtn" class="setting-btn">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 3.75H6.912a2.25 2.25 0 0 0-2.15 1.588L2.35 13.177a2.25 2.25 0 0 0-.1.661V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18v-4.162c0-.224-.034-.447-.1-.661L19.24 5.338a2.25 2.25 0 0 0-2.15-1.588H15M2.25 13.5h3.86a2.25 2.25 0 0 1 2.012 1.244l.256.512a2.25 2.25 0 0 0 2.013 1.244h3.218a2.25 2.25 0 0 0 2.013-1.244l.256-.512a2.25 2.25 0 0 1 2.013-1.244h3.859" />
+            </svg>
+            <div class="setting-info">
+              <span class="setting-label">邮箱域名</span>
+              <span id="selectedDomain" class="setting-value">随机</span>
+            </div>
           </button>
         </div>
       </div>
@@ -96,18 +170,19 @@ import { countries, emailDomains } from '../lib/data';
 <div id="countryDrawer" class="drawer">
   <div class="drawer-backdrop"></div>
   <div class="drawer-panel">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-semibold text-gray-900">选择地区</h3>
-      <button class="drawer-close text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+      <h3 style="font-size: 20px; font-weight: 700; color: #1e293b;">选择地区</h3>
+      <button class="drawer-close" style="color: #94a3b8; font-size: 28px; line-height: 1; border: none; background: none; cursor: pointer; transition: color 0.2s;">&times;</button>
     </div>
-    <div class="space-y-2 max-h-96 overflow-y-auto">
+    <div style="display: flex; flex-direction: column; gap: 8px; max-height: 400px; overflow-y: auto;">
       {countries.map(country => (
         <button
           data-country={country.code}
-          class="country-option w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors flex items-center justify-between"
+          class="country-option"
+          style="width: 100%; text-align: left; padding: 16px; border-radius: 12px; border: 2px solid #e2e8f0; background: #f8fafc; cursor: pointer; transition: all 0.3s ease; display: flex; align-items: center; justify-content: space-between;"
         >
-          <span class="font-medium">{country.name}</span>
-          <span class="text-sm text-gray-500">{country.phonePrefix}</span>
+          <span style="font-weight: 600; color: #1e293b;">{country.name}</span>
+          <span style="font-size: 14px; color: #64748b;">{country.phonePrefix}</span>
         </button>
       ))}
     </div>
@@ -117,21 +192,22 @@ import { countries, emailDomains } from '../lib/data';
 <div id="domainDrawer" class="drawer">
   <div class="drawer-backdrop"></div>
   <div class="drawer-panel">
-    <div class="flex items-center justify-between mb-4">
-      <h3 class="text-lg font-semibold text-gray-900">选择邮箱域名</h3>
-      <button class="drawer-close text-gray-400 hover:text-gray-600 text-2xl leading-none">&times;</button>
+    <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 24px;">
+      <h3 style="font-size: 20px; font-weight: 700; color: #1e293b;">选择邮箱域名</h3>
+      <button class="drawer-close" style="color: #94a3b8; font-size: 28px; line-height: 1; border: none; background: none; cursor: pointer; transition: color 0.2s;">&times;</button>
     </div>
     <input
       type="text"
       id="domainSearch"
       placeholder="搜索域名..."
-      class="w-full px-4 py-2 mb-4 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+      style="width: 100%; padding: 14px 16px; margin-bottom: 16px; border: 2px solid #e2e8f0; border-radius: 12px; font-size: 15px; outline: none; transition: border-color 0.3s;"
     />
-    <div id="domainList" class="space-y-2 max-h-80 overflow-y-auto">
+    <div id="domainList" style="display: flex; flex-direction: column; gap: 8px; max-height: 320px; overflow-y: auto;">
       {emailDomains.map(domain => (
         <button
           data-domain={domain.value}
-          class="domain-option w-full text-left px-4 py-3 rounded-lg hover:bg-gray-100 transition-colors"
+          class="domain-option"
+          style="width: 100%; text-align: left; padding: 16px; border-radius: 12px; border: 2px solid #e2e8f0; background: #f8fafc; cursor: pointer; transition: all 0.3s ease; font-weight: 500; color: #1e293b;"
         >
           {domain.label}
         </button>
@@ -141,20 +217,407 @@ import { countries, emailDomains } from '../lib/data';
 </div>
 
 <style>
+  .decorative-circles {
+    position: absolute;
+    top: -100px;
+    right: -100px;
+    width: 300px;
+    height: 300px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    border-radius: 50%;
+    opacity: 0.1;
+    filter: blur(60px);
+    pointer-events: none;
+  }
+
+  .decorative-circles::before {
+    content: '';
+    position: absolute;
+    bottom: -150px;
+    left: -200px;
+    width: 350px;
+    height: 350px;
+    background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    border-radius: 50%;
+    opacity: 0.8;
+  }
+
+  .card-container {
+    background: white;
+    border-radius: 24px;
+    box-shadow: 0 20px 60px -12px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    position: relative;
+    animation: fadeIn 0.6s ease-out;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .header-section {
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    padding: 48px 32px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .header-section::before {
+    content: '';
+    position: absolute;
+    top: -50%;
+    right: -10%;
+    width: 300px;
+    height: 300px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
+  }
+
+  .header-section::after {
+    content: '';
+    position: absolute;
+    bottom: -30%;
+    left: -5%;
+    width: 200px;
+    height: 200px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 50%;
+  }
+
+  .icon-badge {
+    width: 64px;
+    height: 64px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 20px;
+    animation: float 3s ease-in-out infinite;
+    position: relative;
+    z-index: 1;
+  }
+
+  @keyframes float {
+    0%, 100% {
+      transform: translateY(0px);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .icon-badge svg {
+    width: 32px;
+    height: 32px;
+    color: white;
+  }
+
+  .main-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: white;
+    margin-bottom: 8px;
+    letter-spacing: -0.02em;
+    position: relative;
+    z-index: 1;
+  }
+
+  .subtitle {
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 16px;
+    font-weight: 400;
+    position: relative;
+    z-index: 1;
+  }
+
+  .content-section {
+    padding: 32px;
+  }
+
+  .loading-container {
+    text-align: center;
+    padding: 64px 32px;
+  }
+
+  .spinner {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    border: 4px solid #e0f2fe;
+    border-top-color: #0ea5e9;
+    border-radius: 50%;
+    animation: spin 0.8s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  .loading-text {
+    margin-top: 16px;
+    color: #64748b;
+    font-size: 14px;
+  }
+
+  .fields-grid {
+    display: grid;
+    gap: 20px;
+    margin-bottom: 32px;
+  }
+
+  .field-item {
+    animation: slideInUp 0.5s ease-out backwards;
+  }
+
+  .field-item:nth-child(1) { animation-delay: 0.05s; }
+  .field-item:nth-child(2) { animation-delay: 0.1s; }
+  .field-item:nth-child(3) { animation-delay: 0.15s; }
+  .field-item:nth-child(4) { animation-delay: 0.2s; }
+  .field-item:nth-child(5) { animation-delay: 0.25s; }
+  .field-item:nth-child(6) { animation-delay: 0.3s; }
+
+  @keyframes slideInUp {
+    from {
+      opacity: 0;
+      transform: translateY(15px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .field-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: #475569;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .field-icon {
+    width: 16px;
+    height: 16px;
+    color: #0ea5e9;
+  }
+
+  .phone-prefix {
+    font-size: 11px;
+    color: #94a3b8;
+    font-weight: 400;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+
+  .input-group {
+    display: flex;
+    gap: 8px;
+  }
+
+  .styled-input {
+    flex: 1;
+    padding: 14px 16px;
+    background: linear-gradient(to bottom, #f8fafc, #f1f5f9);
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    font-size: 15px;
+    color: #1e293b;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    outline: none;
+  }
+
+  .styled-input:focus {
+    border-color: #0ea5e9;
+    background: white;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+  }
+
+  .copy-btn {
+    padding: 14px;
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 48px;
+  }
+
+  .copy-btn svg {
+    width: 20px;
+    height: 20px;
+    color: white;
+  }
+
+  .copy-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px -4px rgba(14, 165, 233, 0.4);
+  }
+
+  .copy-btn:active {
+    transform: translateY(0);
+  }
+
+  .copy-btn.copied {
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  }
+
+  .action-buttons {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: 12px;
+    margin-bottom: 24px;
+  }
+
+  .primary-btn, .secondary-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 24px;
+    border: none;
+    border-radius: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .primary-btn svg, .secondary-btn svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .primary-btn {
+    background: linear-gradient(135deg, #0ea5e9 0%, #06b6d4 100%);
+    color: white;
+    box-shadow: 0 4px 12px -2px rgba(14, 165, 233, 0.3);
+  }
+
+  .primary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(14, 165, 233, 0.4);
+  }
+
+  .secondary-btn {
+    background: linear-gradient(135deg, #f59e0b 0%, #f97316 100%);
+    color: white;
+    box-shadow: 0 4px 12px -2px rgba(245, 158, 11, 0.3);
+  }
+
+  .secondary-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px -4px rgba(245, 158, 11, 0.4);
+  }
+
+  .settings-section {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    padding-top: 24px;
+    border-top: 2px solid #f1f5f9;
+  }
+
+  .setting-btn {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: #f8fafc;
+    border: 2px solid #e2e8f0;
+    border-radius: 14px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+  }
+
+  .setting-btn svg {
+    width: 24px;
+    height: 24px;
+    color: #0ea5e9;
+    flex-shrink: 0;
+  }
+
+  .setting-btn:hover {
+    background: white;
+    border-color: #0ea5e9;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(14, 165, 233, 0.2);
+  }
+
+  .setting-info {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    flex: 1;
+    min-width: 0;
+  }
+
+  .setting-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #94a3b8;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .setting-value {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    max-width: 100%;
+  }
+
   .drawer {
-    @apply fixed inset-0 z-50 hidden;
+    position: fixed;
+    inset: 0;
+    z-index: 50;
+    display: none;
   }
 
   .drawer.active {
-    @apply flex items-end justify-center;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
   }
 
   .drawer-backdrop {
-    @apply absolute inset-0 bg-black bg-opacity-50 transition-opacity;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+    transition: opacity 0.3s;
   }
 
   .drawer-panel {
-    @apply relative bg-white w-full max-w-2xl rounded-t-2xl p-6 shadow-xl transform transition-transform;
+    position: relative;
+    background: white;
+    width: 100%;
+    max-width: 640px;
+    border-radius: 24px 24px 0 0;
+    padding: 32px;
+    box-shadow: 0 -10px 40px -10px rgba(0, 0, 0, 0.2);
+    transform: translateY(0);
     animation: slideUp 0.3s ease-out;
   }
 
@@ -167,13 +630,52 @@ import { countries, emailDomains } from '../lib/data';
     }
   }
 
+  .country-option:hover,
+  .domain-option:hover {
+    background: white !important;
+    border-color: #0ea5e9 !important;
+    transform: translateX(4px);
+  }
+
+  .drawer-close:hover {
+    color: #1e293b !important;
+  }
+
+  #domainSearch:focus {
+    border-color: #0ea5e9 !important;
+    box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+  }
+
   @media (min-width: 768px) {
-    .drawer {
-      @apply items-center;
+    .drawer.active {
+      align-items: center;
     }
 
     .drawer-panel {
-      @apply rounded-2xl max-h-[80vh];
+      border-radius: 24px;
+      max-height: 80vh;
+    }
+
+    .fields-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .action-buttons {
+      grid-template-columns: 1fr auto;
+    }
+  }
+
+  @media (max-width: 767px) {
+    .main-title {
+      font-size: 24px;
+    }
+
+    .action-buttons {
+      grid-template-columns: 1fr;
+    }
+
+    .settings-section {
+      grid-template-columns: 1fr;
     }
   }
 </style>
@@ -210,14 +712,9 @@ import { countries, emailDomains } from '../lib/data';
   const copyToClipboard = async (text: string, button: HTMLElement) => {
     try {
       await navigator.clipboard.writeText(text);
-      const originalText = button.textContent;
-      button.textContent = '已复制';
-      button.classList.add('bg-green-500', 'hover:bg-green-600');
-      button.classList.remove('bg-blue-500', 'hover:bg-blue-600');
+      button.classList.add('copied');
       setTimeout(() => {
-        button.textContent = originalText;
-        button.classList.remove('bg-green-500', 'hover:bg-green-600');
-        button.classList.add('bg-blue-500', 'hover:bg-blue-600');
+        button.classList.remove('copied');
       }, 1500);
     } catch (err) {
       console.error('Copy failed:', err);
